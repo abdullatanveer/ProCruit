@@ -7,30 +7,32 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import { useRouter, Stack, useGlobalSearchParams } from "expo-router";
+import { useRouter, Stack, useLocalSearchParams } from "expo-router";
 import { COLORS, icons, SIZES } from "../../constants";
 import {
   Company,
   JobAbout,
   JobFooter,
-  JobTabs,
+   
   ScreenHeaderBtn,
   Screenheaderbtn,
   Specifics,
+  JobTabs,
 } from "../../components";
 import useFetch from "../../hooks/useFetch";
 
 const tabs = ["About", "Qualifications", "Resposnsibilities"];
+// console.log(tabs);
 
 const JobDetails = () => {
   const router = useRouter();
-  const params = useGlobalSearchParams();
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const params = useLocalSearchParams();
 
   const { data, isloading, error, refetch } = useFetch("job-details", {
     job_id: params.id,
   });
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
   const onRefresh = () => {};
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -75,10 +77,12 @@ const JobDetails = () => {
               />
 
               <JobTabs
-                tabs={tabs}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
+               tabs={tabs}
+               activeTab={activeTab}
+               setActiveTab={setActiveTab}
+                 
               />
+               
             </View>
           )}
         </ScrollView>
